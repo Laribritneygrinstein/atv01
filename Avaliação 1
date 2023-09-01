@@ -1,0 +1,48 @@
+#Nome: Larissa Britney Grinstein
+
+# Função para executar operações nos conjuntos
+def execute_Programaoperações(operações):
+    i = 0
+    while i < len(operações):
+        codigo_operacao = operações[i]
+        conjunto1 = set(operações[i + 1].split(','))
+        conjunto2 = set(operações[i + 2].split(','))
+
+        resultado = None
+
+        if codigo_operacao == 'U':
+            resultado = conjunto1.union(conjunto2)
+            operação_descrição = "União"
+        elif codigo_operacao == 'I':
+            resultado = conjunto1.intersection(conjunto2)
+            operação_descrição = "Interseção"
+        elif codigo_operacao == 'D':
+            resultado = conjunto1.difference(conjunto2)
+            operação_descrição = "Diferença"
+        elif codigo_operacao == 'C':
+            resultado = {(a, b) for a in conjunto1 for b in conjunto2}
+            operação_descrição = "Produto Cartesiano"
+        else:
+            print(f"Código de operação desconhecido: {codigo_operacao}")
+            return
+
+        # Formatando a saída
+        print(f"{operação_descrição}:")
+        print(f"conjunto 1 {conjunto1}, conjunto 2 {conjunto2}")
+        print(f"Resultado: {resultado}")
+        print()
+
+        i += 3
+
+# Ler o arquivo de texto
+with open('Programaoperações.txt', 'r') as arquivo:
+    linhas = arquivo.readlines()
+
+# Extrair o número de operações
+numero_operações = int(linhas[0].strip())
+
+# Extrair as operações
+operações = [linha.strip() for linha in linhas[1:]]
+
+# Executar as operações nos conjuntos
+execute_Programaoperações(operações)
